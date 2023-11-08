@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ePAY</title>
+
+  <link rel="stylesheet" href="/static/css/normalize.css">
+  <link rel="stylesheet" href="/static/css/styles.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+
+</head>
+<body 
+style="            
+min-height: 100vh; 
+position: relative;"
+>
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/user/signout">ePAY</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/contact/">Contact us</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Action
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/user/signout">Signout</a></li>
+            <li><a class="dropdown-item" href="#">view balance</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+      </ul>
+      <li class="nav-item">
+        <a class="btn btn-outline-danger btn-sm mx-4 my-2" href="/user/signout">Signout</a>
+      </li>
+        <a class="nav-link " href="#"><strong>{{ session['user']['name'] }}</strong></a>
+
+    </div>
+  </div>
+</nav>
+
+<div class="background-div position-absolute"  style="height: 30vw; width: 100%; z-index: -1;">
+  <img style="height: 80%; width: 100%; z-index: -1;"src="../static/banner.png" class="img-fluid" alt="..." >
+</div>
+<h1 style="color: #fff; padding-top: 6vw; padding-left: 3vw; font-size: 72px;">
+  Welcome, {{ session['user']['name'] }} <br>
+
+  <small class="text" style="color: #ffffffd8;font-size: 52px;"><strong id="balance"> Your Balance:&#8377;</strong> {{ user['wallet_balance'] }}<br></small>
+</h1>
+
+
+<!-- <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-top: 8vw;" id="strip">
+  <div class="container">
+      <ul class="navbar-nav mx-auto">
+          <li class="nav-item">
+        <button class="btn btn-outline-secondary" id="transferBtn">Transfer from wallet</button>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-outline-secondary" id="topupBtn">Topup wallet</button>
+          </li>
+          <li class="nav-item">
+            <button class="btn btn-outline-secondary" id="upiBtn">UPI payment</button>
+          </li>
+      </ul>
+  </div>
+</nav> -->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-top: 8vw;" id="strip">
+  <div class="container">
+    <ul class="navbar-nav mx-auto">
+      <li class="nav-item">
+        <button class="btn btn-outline-secondary" data-target="transfer_money" id="transferBtn" onclick="show_transfer_money()">Transfer from wallet</button>
+      </li>
+      <li class="nav-item">
+        <button class="btn btn-outline-secondary" data-target="card_payment" id="topupBtn" onclick="show_add_money()">Topup wallet</button>
+      </li>
+      <li class="nav-item">
+        <button class="btn btn-outline-secondary" data-target="upi_payment" id="upiBtn">UPI payment</button>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Add your elements with IDs "transfer_money" and "card_payment" as before. -->
+
+
+<div class="card-wrapper">
+<!-- <div class="card">
+
+  <h2 class="center">Your Info</h2>
+
+  <p>
+    <strong>Name:</strong> {{ user['name'] }}<br>
+    <strong id="balance">Balance:</strong> {{ user['wallet_balance'] }}<br>
+    <strong>Phone:</strong> {{ user['phone_no'] }}<br>
+    <strong>Email:</strong> {{ user['email'] }}
+  </p>
+
+</div> -->
+
+  <section class="gradient-custom " style="display: none;" id="card_payment">
+    <div class="container py-5">
+      <div class="row d-flex justify-content-center py-5">
+        <div class="col-md-7 col-lg-5 col-xl-4">
+          <div class="card" style="border-radius: 15px;">
+            <div class="card-body p-4">
+              <form id="card_form" onsubmit="process_topup()">
+
+                
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                  <div class="form-outline">
+                    <input id="amount_topup" type="text" id="typeName" class="form-control form-control-lg" siez="17"
+                      placeholder="Add Amount" />
+                    <label  class="form-label" for="typeName">Add amount</label>
+                  </div>
+                </div>
+  
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <div class="form-outline">
+                    <input type="text" id="typeText" class="form-control form-control-lg" siez="17"
+                      placeholder="1234 5678 9012 3457" minlength="19" maxlength="19" />
+                    <label  class="form-label" for="typeText">Card Number</label>
+                  </div>
+                  <img src="https://img.icons8.com/color/48/000000/visa.png" alt="visa" width="64px" />
+                </div>
+                
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                  <div class="form-outline">
+                    <input type="text" id="typeName" class="form-control form-control-lg" siez="17"
+                      placeholder="Cardholder's Name" />
+                    <label class="form-label" for="typeName">Cardholder's Name</label>
+                  </div>
+                </div>
+  
+                <div class="d-flex justify-content-between align-items-center pb-2">
+                  <div class="form-outline">
+                    <input type="text" id="typeExp" class="form-control form-control-lg" placeholder="MM/YYYY"
+                      size="7" id="exp" minlength="7" maxlength="7" />
+                    <label class="form-label" for="typeExp">Expiration</label>
+                  </div>
+                  <div class="form-outline">
+                    <input type="password" id="typeText2" class="form-control form-control-lg"
+                      placeholder="&#9679;&#9679;&#9679;" size="1" minlength="3" maxlength="3" />
+                    <label class="form-label" for="typeText2">Cvv</label>
+                  </div>
+                  <button type="submit" class="btn btn-info btn-lg btn-rounded">
+                    Submit
+                  </button>
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div style="display: none;" id="transfer_money">
+    <div class="card ">
+      <h1 class="center">Transfer money</h1>
+      <form name="transfer_form" id="transfer_form" onsubmit="process_transfer()" >
+    
+        <label for="phone_no">Receiver phone number</label>
+        <input id="phone_no" type="number" name="phone_no" class="field" required>
+    
+        <label for="password">Password</label>
+        <input id="password" type="password" name="password" class="field" required>
+    
+        <label for="amount">Amount</label>
+        <input id="amount" type="number" name="amount" class="field" required>
+        
+        <p class="error error--hidden"></p>
+        
+        <button class="btn btn-success" type="submit" class="btn" id="transfer">transfer </button>
+      </form>
+    </div>
+  </div>
+
+
+</div>
+  
+  <footer class="bg-dark text-light text-center py-3" 
+  style="            
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background-color: #343a40; /* Background color */
+  color: #fff; /* Text color */
+  text-align: left;
+  padding: 10px 0;"
+  >
+    &copy; 2023 ePAy. All rights reserved.
+  </footer>
+  <script src="/static/js/jquery.js"></script>
+  <script src="/static/js/scripts.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

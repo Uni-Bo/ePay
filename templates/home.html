@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="card-wrapper">
+
+    <div class="card" style="display:none;" id="sign_up">
+
+      <h1 class="center">Create an Account</h1>
+
+      <form name="signup_form">
+
+        <label for="name">Name</label>
+        <input type="text" name="name" class="field" required>
+
+        <label for="email">Email</label>
+        <input type="email" name="email" class="field" required>
+
+        <label for="password">Password</label>
+        <input type="password" name="password" class="field" required>
+
+        <label for="phone_no">Phone number</label>
+        <input type="number" name="phone_no" class="field" required>
+
+        <p class="error error--hidden"></p>
+
+        <input class="btn btn-success" type="submit" value="Sign Up" class="btn">
+      
+      </form>
+      
+    </div>
+
+    <div class="card" id="log_in">
+
+      <h1 class="center">Log In</h1>
+
+      <form name="login_form">
+
+        <label for="email">Email</label>
+        <input type="email" name="email" class="field" required>
+
+        <label for="password">Password</label>
+        <input type="password" name="password" class="field" required>
+
+        <p class="error error--hidden"></p>
+
+        <input class=" btn btn-success" type="submit" value="Log In" class="btn">
+      
+      </form>
+      <p class="center"> New user?</p>
+      <button class="btn btn-secondary" id="change_card">Sign up</button>
+      <button class="btn btn-outline-danger btn-sm float-right" id="forgot_change">Forgot password ?</button>
+    </div>
+
+
+    <div class="card" id="forgot_card" style="display:none;">
+
+      <h1 class="center">Reset password</h1>
+
+      <form name="password_form">
+
+        <label for="email">Email</label>
+        <input type="email" name="email" class="field" required>
+
+        <label for="new_password">New Password</label>
+        <input type="password" name="new_password" class="field" required>
+
+        <p class="error error--hidden"></p>
+
+        <input class=" btn btn-success" type="submit" value="Reset" class="btn" id="reset">
+      
+      </form>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{% endblock %}

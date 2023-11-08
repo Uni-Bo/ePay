@@ -1,0 +1,7 @@
+Flask==3.0
+flask-pymongo==2.2.0
+passlib
+pymongo=4.5
+git+https://github.com/Pinaki19/flask-session.git
+pymongo[srv]
+requests==2.22.0

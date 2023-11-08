@@ -1,0 +1,16 @@
+{
+    "version":2,
+    "buils":[
+        {
+            "sec":"*.py",
+            "use":"@vercel/python"
+        }
+    ],
+    "regions":["bom1"],
+    "routes":[
+        {
+            "src":"(.*)",
+            "dest":"app.py"
+        }
+    ]
+}

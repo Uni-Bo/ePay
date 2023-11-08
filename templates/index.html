@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+     <!-- Background Div (Smaller in Height) -->
+  <div class="background-div position-absolute" style="height: 80%; width: 100%; z-index: -1;">
+      <img src="../static/banner.png" class="card-img-top" alt="...">
+  </div>
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="position-relative">
+
+        <!-- Card Div -->
+        <div class="card shadow mx-auto my-5 top: 17vh;" style="width: 20rem;">
+          <img src="../static/ePay_logo.png" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h4 class="card-title">Welcome to ePAY</h4>
+            <p class="card-text"> <strong>Money made simple. <br> </strong> 
+                Built for India with all the features and rewards you love, plus much more.</p>
+            <a href="/contact/" class="btn btn-primary">about us</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
