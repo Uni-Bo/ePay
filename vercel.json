@@ -1,6 +1,6 @@
 {
     "version":2,
-    "buils":[
+    "builds":[
         {
             "sec":"*.py",
             "use":"@vercel/python"
